@@ -1,5 +1,5 @@
 package xsd
-
+import "fmt"
 func (me *hasElemAll) initChildren(p element) {
 	if me.All != nil {
 		me.All.initElement(p)
@@ -37,6 +37,7 @@ func (me *hasElemsAttribute) initChildren(p element) {
 }
 
 func (me *hasElemsAttributeGroup) initChildren(p element) {
+	fmt.Printf("initChildren %v\n", me)
 	for _, ag := range me.AttributeGroups {
 		ag.initElement(p)
 	}

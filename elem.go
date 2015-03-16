@@ -1,7 +1,7 @@
 package xsd
 
 import (
-	xsdt "github.com/metaleap/go-xsd/types"
+	"types"
 )
 
 type element interface {
@@ -77,7 +77,7 @@ type All struct {
 	hasAttrMaxOccurs
 	hasAttrMinOccurs
 	hasElemAnnotation
-	hasElemsElement
+	hasElemsElement `xml:"element"`
 }
 
 type Annotation struct {
@@ -150,7 +150,7 @@ type Choice struct {
 	hasElemAnnotation
 	hasElemsAny
 	hasElemsChoice
-	hasElemsElement
+	hasElemsElement `xml:"element"`
 	hasElemsGroup
 	hasElemsSequence
 }
@@ -484,7 +484,7 @@ type Sequence struct {
 	hasElemAnnotation
 	hasElemsAny
 	hasElemsChoice
-	hasElemsElement
+	hasElemsElement `xml:"element"`
 	hasElemsGroup
 	hasElemsSequence
 }

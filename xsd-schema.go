@@ -2,7 +2,7 @@ package xsd
 
 import (
 	"bytes"
-	"encoding/xml"
+	"encoding2/xml"
 	"io"
 	"io/ioutil"
 	"os"
@@ -10,9 +10,11 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/go-utils/ufs"
-	"github.com/go-utils/unet"
-	"github.com/go-utils/ustr"
+//	"github.com/go-utils/ufs"
+	"ufs"
+	"unet"
+//	"github.com/go-utils/ustr"
+	"ustr"
 	"fmt"
 )
 
@@ -47,10 +49,10 @@ type Schema struct {
 	hasAttrVersion
 	hasElemAnnotation
 	hasElemsAttribute
-	hasElemsAttributeGroup
+	hasElemsAttributeGroup `xml:"attributeGroup"`
 	hasElemsComplexType
-	hasElemsElement
-	hasElemsGroup
+	hasElemsElement `xml:"element"`
+	hasElemsGroup `xml:"group"`
 	hasElemsInclude
 	hasElemsImport
 	hasElemsNotation
@@ -167,12 +169,18 @@ func (me *Schema) MakeGoPkgSrcFile() (goOutFilePath string, err error) {
 	loadedSchemas := make(map[string]bool)
 	for _, inc := range me.allSchemas(loadedSchemas) {
 		bag.Schema = inc
+		//fmt.Printf("Bag %v\n", bag)
+		fmt.Printf("Bag allElems %v\n", bag.allElems)
 		inc.makePkg(bag)
 	}
 	bag.Schema = me
 	me.hasElemAnnotation.makePkg(bag)
 	bag.appendFmt(true, "")
 	me.makePkg(bag)
+
+	//fmt.Printf("Bag2 %v\n", bag)
+	fmt.Printf("Bag2 allElems %v\n", bag.allElems)
+
 	if err = ufs.EnsureDirExists(filepath.Dir(goOutFilePath)); err == nil {
 		err = ufs.WriteTextFile(goOutFilePath, bag.assembleSource())
 	}
@@ -280,8 +288,11 @@ func loadSchemaFile(filename string, loadUri string) (sd *Schema, err error) {
 }
 
 func LoadSchema(uri string, localCopy bool) (sd *Schema, err error) {
-	var protocol, localPath string
-	var rc io.ReadCloser
+
+	var protocol string
+	var  localPath string
+	var rc  io.ReadCloser
+	
 
 	if pos := strings.Index(uri, protSep); pos < 0 {
 		protocol = "http" + protSep
@@ -300,7 +311,7 @@ func LoadSchema(uri string, localCopy bool) (sd *Schema, err error) {
 				sd.loadLocalPath = localPath
 			}
 		}
-	} else if rc, err = unet.OpenRemoteFile(protocol + uri); err == nil {
+	}  else if rc, err = unet.OpenRemoteFile(protocol + uri); err == nil {
 		defer rc.Close()
 		sd, err = loadSchema(rc, uri, "")
 	}

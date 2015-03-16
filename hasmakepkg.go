@@ -1,5 +1,5 @@
 package xsd
-
+import "fmt"
 func (me *hasElemAll) makePkg(bag *PkgBag) {
 	if me.All != nil {
 		me.All.makePkg(bag)
@@ -37,6 +37,7 @@ func (me *hasElemsAttribute) makePkg(bag *PkgBag) {
 }
 
 func (me *hasElemsAttributeGroup) makePkg(bag *PkgBag) {
+	fmt.Printf("makePkg hasElemsAttributeGroup %v\n", me)
 	for _, ag := range me.AttributeGroups {
 		ag.makePkg(bag)
 	}

@@ -5,11 +5,15 @@ import (
 	"path"
 	"strings"
 
-	"github.com/go-utils/ugo"
-	"github.com/go-utils/uslice"
-	"github.com/go-utils/ustr"
+//	"github.com/go-utils/ugo"
+	"ugo"
+//	"github.com/go-utils/uslice"
+	"uslice"
+//	"github.com/go-utils/ustr"
+	"ustr"
 
-	xsdt "github.com/metaleap/go-xsd/types"
+//	xsdt "github.com/metaleap/go-xsd/types"
+	"types"
 )
 
 var (
@@ -162,6 +166,9 @@ func (me *PkgBag) appendFmt(addLineAfter bool, format string, fmtArgs ...interfa
 }
 
 func (me *PkgBag) assembleSource() string {
+
+	fmt.Printf("assembleSource %v", me)
+
 	var (
 		dt     *declType
 		render = func(el element) {

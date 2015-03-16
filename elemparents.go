@@ -1,4 +1,5 @@
 package xsd
+import "fmt"
 
 func (me *All) initElement(parent element) {
 	me.elemBase.init(parent, me, "all", &me.hasAttrId, &me.hasAttrMaxOccurs, &me.hasAttrMinOccurs)
@@ -33,6 +34,8 @@ func (me *Attribute) initElement(parent element) {
 }
 
 func (me *AttributeGroup) initElement(parent element) {
+	fmt.Printf("initElement %v\n", me)
+	fmt.Printf("initElement %v\n", parent)
 	me.elemBase.init(parent, me, "attributeGroup", &me.hasAttrId, &me.hasAttrName, &me.hasAttrRef)
 	me.hasElemAnnotation.initChildren(me)
 	me.hasElemsAttribute.initChildren(me)
@@ -58,6 +61,8 @@ func (me *ComplexContent) initElement(parent element) {
 }
 
 func (me *ComplexType) initElement(parent element) {
+	fmt.Printf("initElement %v\n", me)
+	fmt.Printf("initElement %v\n", parent)
 	me.elemBase.init(parent, me, "complexType", &me.hasAttrAbstract, &me.hasAttrBlock, &me.hasAttrFinal, &me.hasAttrId, &me.hasAttrMixed, &me.hasAttrName)
 	me.hasElemAnnotation.initChildren(me)
 	me.hasElemAll.initChildren(me)
@@ -86,6 +91,8 @@ func (me *Element) initElement(parent element) {
 }
 
 func (me *ExtensionComplexContent) initElement(parent element) {
+	fmt.Printf("initElement %v\n", me)
+	fmt.Printf("initElement %v\n", parent)
 	me.elemBase.init(parent, me, "extension", &me.hasAttrBase, &me.hasAttrId)
 	me.hasElemAnnotation.initChildren(me)
 	me.hasElemAll.initChildren(me)
@@ -98,6 +105,8 @@ func (me *ExtensionComplexContent) initElement(parent element) {
 }
 
 func (me *ExtensionSimpleContent) initElement(parent element) {
+	fmt.Printf("initElement %v\n", me)
+	fmt.Printf("initElement %v\n", parent)
 	me.elemBase.init(parent, me, "extension", &me.hasAttrBase, &me.hasAttrId)
 	me.hasElemAnnotation.initChildren(me)
 	me.hasElemsAttribute.initChildren(me)
@@ -149,6 +158,9 @@ func (me *Notation) initElement(parent element) {
 }
 
 func (me *Redefine) initElement(parent element) {
+	fmt.Printf("initElement %v\n", me)
+	fmt.Printf("initElement %v\n", parent)
+
 	me.elemBase.init(parent, me, "redefine", &me.hasAttrId, &me.hasAttrSchemaLocation)
 	me.hasElemAnnotation.initChildren(me)
 	me.hasElemsGroup.initChildren(me)
@@ -158,6 +170,8 @@ func (me *Redefine) initElement(parent element) {
 }
 
 func (me *RestrictionComplexContent) initElement(parent element) {
+	fmt.Printf("initElement %v\n", me)
+	fmt.Printf("initElement %v\n", parent)
 	me.elemBase.init(parent, me, "restriction", &me.hasAttrBase, &me.hasAttrId)
 	me.hasElemAnnotation.initChildren(me)
 	me.hasElemAll.initChildren(me)
@@ -169,6 +183,8 @@ func (me *RestrictionComplexContent) initElement(parent element) {
 }
 
 func (me *RestrictionSimpleContent) initElement(parent element) {
+	fmt.Printf("initElement %v\n", me)
+	fmt.Printf("initElement %v\n", parent)
 	me.elemBase.init(parent, me, "restriction", &me.hasAttrBase, &me.hasAttrId)
 	me.hasElemAnnotation.initChildren(me)
 	me.hasElemLength.initChildren(me)
@@ -256,6 +272,10 @@ func (me *RestrictionSimpleWhiteSpace) initElement(parent element) {
 }
 
 func (me *Schema) initElement(parent element) {
+
+	fmt.Printf("initElement %v\n", me)
+	fmt.Printf("initElement %v\n", parent)
+
 	me.elemBase.init(parent, me, "schema", &me.hasAttrId, &me.hasAttrLang, &me.hasAttrVersion, &me.hasAttrBlockDefault, &me.hasAttrFinalDefault, &me.hasAttrSchemaLocation, &me.hasAttrTargetNamespace, &me.hasAttrAttributeFormDefault, &me.hasAttrElementFormDefault)
 	me.hasElemAnnotation.initChildren(me)
 	me.hasElemsAttribute.initChildren(me)

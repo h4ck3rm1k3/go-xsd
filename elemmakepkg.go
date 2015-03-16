@@ -5,9 +5,9 @@ import (
 	"path"
 	"strings"
 
-	"github.com/go-utils/ustr"
-
-	xsdt "github.com/metaleap/go-xsd/types"
+//	"github.com/go-utils/ustr"
+	"ustr"
+	"types"
 )
 
 const (
@@ -15,12 +15,15 @@ const (
 )
 
 func (me *All) makePkg(bag *PkgBag) {
+	fmt.Printf("All::makePkg %v\n", bag)
+
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsElement.makePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *Annotation) makePkg(bag *PkgBag) {
+	fmt.Printf("1::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsAppInfo.makePkg(bag)
 	me.hasElemsDocumentation.makePkg(bag)
@@ -28,21 +31,25 @@ func (me *Annotation) makePkg(bag *PkgBag) {
 }
 
 func (me *Any) makePkg(bag *PkgBag) {
+	fmt.Printf("2::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *AnyAttribute) makePkg(bag *PkgBag) {
+	fmt.Printf("3::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *AppInfo) makePkg(bag *PkgBag) {
+	fmt.Printf("4::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *Attribute) makePkg(bag *PkgBag) {
+	fmt.Printf("Attribute::makePkg %v\n", bag)
 	var safeName, typeName, tmp, key, defVal, impName string
 	var defName = "Default"
 	me.elemBase.beforeMakePkg(bag)
@@ -100,6 +107,7 @@ func (me *Attribute) makePkg(bag *PkgBag) {
 }
 
 func (me *AttributeGroup) makePkg(bag *PkgBag) {
+	fmt.Printf("6::makePkg %v\n", bag)
 	var refName, refImp string
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsAttribute.makePkg(bag)
@@ -136,6 +144,7 @@ func (me *AttributeGroup) makePkg(bag *PkgBag) {
 }
 
 func (me *Choice) makePkg(bag *PkgBag) {
+	fmt.Printf("7::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsAny.makePkg(bag)
 	me.hasElemsChoice.makePkg(bag)
@@ -146,6 +155,7 @@ func (me *Choice) makePkg(bag *PkgBag) {
 }
 
 func (me *ComplexContent) makePkg(bag *PkgBag) {
+	fmt.Printf("8::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemExtensionComplexContent.makePkg(bag)
 	me.hasElemRestrictionComplexContent.makePkg(bag)
@@ -153,6 +163,7 @@ func (me *ComplexContent) makePkg(bag *PkgBag) {
 }
 
 func (me *ComplexType) makePkg(bag *PkgBag) {
+	fmt.Printf("elemmakepkg::makePkg %v\n", bag)
 	var att *Attribute
 	var attGroup *AttributeGroup
 	var ctBaseType, ctValueType, typeSafeName string
@@ -340,6 +351,7 @@ func (me *ComplexType) makePkg(bag *PkgBag) {
 }
 
 func (me *Documentation) makePkg(bag *PkgBag) {
+	fmt.Printf("9::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	if len(me.CDATA) > 0 {
 		var s, ln string
@@ -353,6 +365,7 @@ func (me *Documentation) makePkg(bag *PkgBag) {
 }
 
 func (me *Element) makePkg(bag *PkgBag) {
+	fmt.Printf("Element::makePkg %v\n", bag)
 	var (
 		safeName, typeName, valueType, tmp, key, defVal, impName string
 		subEl                                                    *Element
@@ -435,6 +448,7 @@ func (me *Element) makePkg(bag *PkgBag) {
 }
 
 func (me *ExtensionComplexContent) makePkg(bag *PkgBag) {
+	fmt.Printf("10::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsAttribute.makePkg(bag)
 	me.hasElemsAnyAttribute.makePkg(bag)
@@ -447,6 +461,7 @@ func (me *ExtensionComplexContent) makePkg(bag *PkgBag) {
 }
 
 func (me *ExtensionSimpleContent) makePkg(bag *PkgBag) {
+	fmt.Printf("11::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsAttribute.makePkg(bag)
 	me.hasElemsAnyAttribute.makePkg(bag)
@@ -455,11 +470,13 @@ func (me *ExtensionSimpleContent) makePkg(bag *PkgBag) {
 }
 
 func (me *Field) makePkg(bag *PkgBag) {
+	fmt.Printf("12::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *Group) makePkg(bag *PkgBag) {
+	fmt.Printf("13::makePkg %v\n", bag)
 	var refName, refImp string
 	var choices = []*Choice{me.Choice}
 	var seqs = []*Sequence{me.Sequence}
@@ -510,6 +527,7 @@ func (me *Group) makePkg(bag *PkgBag) {
 }
 
 func (me *Import) makePkg(bag *PkgBag) {
+	fmt.Printf("15::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	var impName, impPath string
 	var pos int
@@ -533,6 +551,7 @@ func (me *Import) makePkg(bag *PkgBag) {
 }
 
 func (me *Key) makePkg(bag *PkgBag) {
+	fmt.Printf("16::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemField.makePkg(bag)
 	me.hasElemSelector.makePkg(bag)
@@ -540,6 +559,7 @@ func (me *Key) makePkg(bag *PkgBag) {
 }
 
 func (me *KeyRef) makePkg(bag *PkgBag) {
+	fmt.Printf("17::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemField.makePkg(bag)
 	me.hasElemSelector.makePkg(bag)
@@ -547,6 +567,7 @@ func (me *KeyRef) makePkg(bag *PkgBag) {
 }
 
 func (me *List) makePkg(bag *PkgBag) {
+	fmt.Printf("19::makePkg %v\n", bag)
 	var safeName string
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsSimpleType.makePkg(bag)
@@ -567,6 +588,7 @@ func (me *List) makePkg(bag *PkgBag) {
 }
 
 func (me *Notation) makePkg(bag *PkgBag) {
+	fmt.Printf("19::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemAnnotation.makePkg(bag)
 	bag.appendFmt(false, "%vNotations.Add(%#v, %#v, %#v, %#v)", idPrefix, me.Id, me.Name, me.Public, me.System)
@@ -574,6 +596,7 @@ func (me *Notation) makePkg(bag *PkgBag) {
 }
 
 func (me *Redefine) makePkg(bag *PkgBag) {
+	fmt.Printf("20::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsSimpleType.makePkg(bag)
 	me.hasElemsAttributeGroup.makePkg(bag)
@@ -583,6 +606,7 @@ func (me *Redefine) makePkg(bag *PkgBag) {
 }
 
 func (me *RestrictionComplexContent) makePkg(bag *PkgBag) {
+	fmt.Printf("21::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsAttribute.makePkg(bag)
 	me.hasElemsAnyAttribute.makePkg(bag)
@@ -594,6 +618,7 @@ func (me *RestrictionComplexContent) makePkg(bag *PkgBag) {
 }
 
 func (me *RestrictionSimpleContent) makePkg(bag *PkgBag) {
+	fmt.Printf("22::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsSimpleType.makePkg(bag)
 	me.hasElemsAttribute.makePkg(bag)
@@ -615,6 +640,7 @@ func (me *RestrictionSimpleContent) makePkg(bag *PkgBag) {
 }
 
 func (me *RestrictionSimpleEnumeration) makePkg(bag *PkgBag) {
+	fmt.Printf("23::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	safeName := bag.safeName(ustr.PrependIf(bag.Stacks.CurSimpleType().Name.String(), "T"))
 	var doc = sfmt("Returns true if the value of this enumerated %v is %#v.", safeName, me.Value)
@@ -623,56 +649,67 @@ func (me *RestrictionSimpleEnumeration) makePkg(bag *PkgBag) {
 }
 
 func (me *RestrictionSimpleFractionDigits) makePkg(bag *PkgBag) {
+	fmt.Printf("24::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleLength) makePkg(bag *PkgBag) {
+	fmt.Printf("25::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleMaxExclusive) makePkg(bag *PkgBag) {
+	fmt.Printf("26::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleMaxInclusive) makePkg(bag *PkgBag) {
+	fmt.Printf("27::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleMaxLength) makePkg(bag *PkgBag) {
+	fmt.Printf("28::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleMinExclusive) makePkg(bag *PkgBag) {
+	fmt.Printf("29::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleMinInclusive) makePkg(bag *PkgBag) {
+	fmt.Printf("30::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleMinLength) makePkg(bag *PkgBag) {
+	fmt.Printf("31::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimplePattern) makePkg(bag *PkgBag) {
+	fmt.Printf("33::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleTotalDigits) makePkg(bag *PkgBag) {
+	fmt.Printf("34::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *RestrictionSimpleType) makePkg(bag *PkgBag) {
+	fmt.Printf("36::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsSimpleType.makePkg(bag)
 	me.hasElemLength.makePkg(bag)
@@ -691,30 +728,44 @@ func (me *RestrictionSimpleType) makePkg(bag *PkgBag) {
 }
 
 func (me *RestrictionSimpleWhiteSpace) makePkg(bag *PkgBag) {
+	fmt.Printf("37::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *Schema) makePkg(bag *PkgBag) {
+	fmt.Printf("Schema::makePkg %v\n", bag)
+	fmt.Printf("Schema::makePkg me=%v\n", me)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsImport.makePkg(bag)
 	me.hasElemsSimpleType.makePkg(bag)
+
 	me.hasElemsAttribute.makePkg(bag)
+	fmt.Printf("Schema::makePkg me.hasElemsAttribute %v\n", me.hasElemsAttribute)
+
 	me.hasElemsAttributeGroup.makePkg(bag)
+	fmt.Printf("Schema::makePkg me.hasElemsAttributeGroup %v\n", me.hasElemsAttributeGroup)
+
 	me.hasElemsComplexType.makePkg(bag)
+
+	fmt.Printf("Schema::makePkg me.hasElemsElement %v\n", me.hasElemsElement)
 	me.hasElemsElement.makePkg(bag)
+
 	me.hasElemsGroup.makePkg(bag)
+	fmt.Printf("Schema::makePkg me.hasElemsGroup %v\n", me.hasElemsGroup)
 	me.hasElemsRedefine.makePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *Selector) makePkg(bag *PkgBag) {
+	fmt.Printf("40::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemAnnotation.makePkg(bag)
 	me.elemBase.afterMakePkg(bag)
 }
 
 func (me *Sequence) makePkg(bag *PkgBag) {
+	fmt.Printf("41::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemsAny.makePkg(bag)
 	me.hasElemsChoice.makePkg(bag)
@@ -725,6 +776,7 @@ func (me *Sequence) makePkg(bag *PkgBag) {
 }
 
 func (me *SimpleContent) makePkg(bag *PkgBag) {
+	fmt.Printf("42::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemExtensionSimpleContent.makePkg(bag)
 	me.hasElemRestrictionSimpleContent.makePkg(bag)
@@ -732,6 +784,7 @@ func (me *SimpleContent) makePkg(bag *PkgBag) {
 }
 
 func (me *SimpleType) makePkg(bag *PkgBag) {
+	fmt.Printf("43::makePkg %v\n", bag)
 	var typeName = me.Name
 	var baseType, safeName = "", ""
 	var resolve = true
@@ -785,6 +838,7 @@ func (me *SimpleType) makePkg(bag *PkgBag) {
 }
 
 func (me *Union) makePkg(bag *PkgBag) {
+	fmt.Printf("42::makePkg %v\n", bag)
 	var memberTypes []string
 	var rtn, rtnSafeName, safeName string
 	me.elemBase.beforeMakePkg(bag)
@@ -802,6 +856,7 @@ func (me *Union) makePkg(bag *PkgBag) {
 }
 
 func (me *Unique) makePkg(bag *PkgBag) {
+	fmt.Printf("44::makePkg %v\n", bag)
 	me.elemBase.beforeMakePkg(bag)
 	me.hasElemField.makePkg(bag)
 	me.hasElemSelector.makePkg(bag)

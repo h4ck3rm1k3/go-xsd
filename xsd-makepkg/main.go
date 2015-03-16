@@ -5,10 +5,8 @@ import (
 	"log"
 	"os/exec"
 	"strings"
-
-	"github.com/go-utils/ugo"
-
-	xsd "github.com/metaleap/go-xsd"
+	"ugo"
+	"xsd"
 )
 
 var (
