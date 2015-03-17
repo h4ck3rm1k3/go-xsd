@@ -5,20 +5,20 @@ import (
 )
 
 type element interface {
-	base() *elemBase
+	base() *ElemBase
 	init(parent, self element, xsdName xsdt.NCName, atts ...beforeAfterMake)
 	Parent() element
 }
 
-type elemBase struct {
+type ElemBase struct {
 	atts         []beforeAfterMake
-	parent, self element // self is the struct that embeds elemBase, rather than the elemBase pseudo-field
+	parent, self element // self is the struct that embeds ElemBase, rather than the ElemBase pseudo-field
 	xsdName      xsdt.NCName
-	hasNameAttr  bool
+	HasNameAttr  bool
 }
 
-func (me *elemBase) afterMakePkg(bag *PkgBag) {
-	if !me.hasNameAttr {
+func (me *ElemBase) afterMakePkg(bag *PkgBag) {
+	if !me.HasNameAttr {
 		bag.Stacks.Name.Pop()
 	}
 	for _, a := range me.atts {
@@ -26,8 +26,8 @@ func (me *elemBase) afterMakePkg(bag *PkgBag) {
 	}
 }
 
-func (me *elemBase) beforeMakePkg(bag *PkgBag) {
-	if !me.hasNameAttr {
+func (me *ElemBase) beforeMakePkg(bag *PkgBag) {
+	if !me.HasNameAttr {
 		bag.Stacks.Name.Push(me.xsdName)
 	}
 	for _, a := range me.atts {
@@ -35,18 +35,18 @@ func (me *elemBase) beforeMakePkg(bag *PkgBag) {
 	}
 }
 
-func (me *elemBase) base() *elemBase { return me }
+func (me *ElemBase) base() *ElemBase { return me }
 
-func (me *elemBase) init(parent, self element, xsdName xsdt.NCName, atts ...beforeAfterMake) {
+func (me *ElemBase) init(parent, self element, xsdName xsdt.NCName, atts ...beforeAfterMake) {
 	me.parent, me.self, me.xsdName, me.atts = parent, self, xsdName, atts
 	for _, a := range atts {
-		if _, me.hasNameAttr = a.(*hasAttrName); me.hasNameAttr {
+		if _, me.HasNameAttr = a.(*HasAttrName); me.HasNameAttr {
 			break
 		}
 	}
 }
 
-func (me *elemBase) longSafeName(bag *PkgBag) (ln string) {
+func (me *ElemBase) longSafeName(bag *PkgBag) (ln string) {
 	var els = []element{}
 	for el := me.self; (el != nil) && (el != bag.Schema); el = el.Parent() {
 		els = append(els, el)
@@ -57,10 +57,10 @@ func (me *elemBase) longSafeName(bag *PkgBag) (ln string) {
 	return
 }
 
-func (me *elemBase) selfName() xsdt.NCName {
-	if me.hasNameAttr {
+func (me *ElemBase) selfName() xsdt.NCName {
+	if me.HasNameAttr {
 		for _, at := range me.atts {
-			if an, ok := at.(*hasAttrName); ok {
+			if an, ok := at.(*HasAttrName); ok {
 				return an.Name
 			}
 		}
@@ -68,465 +68,465 @@ func (me *elemBase) selfName() xsdt.NCName {
 	return me.xsdName
 }
 
-func (me *elemBase) Parent() element { return me.parent }
+func (me *ElemBase) Parent() element { return me.parent }
 
 type All struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"all"`
-	hasAttrId
-	hasAttrMaxOccurs
-	hasAttrMinOccurs
-	hasElemAnnotation
-	hasElemsElement `xml:"element"`
+	HasAttrId
+	HasAttrMaxOccurs
+	HasAttrMinOccurs
+	HasElemAnnotation
+	HasElemsElement `xml:"element"`
 }
 
 type Annotation struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"annotation"`
-	hasElemsAppInfo
-	hasElemsDocumentation
+	HasElemsAppInfo
+	HasElemsDocumentation
 }
 
 type Any struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"any"`
-	hasAttrId
-	hasAttrMaxOccurs
-	hasAttrMinOccurs
-	hasAttrNamespace
-	hasAttrProcessContents
-	hasElemAnnotation
+	HasAttrId
+	HasAttrMaxOccurs
+	HasAttrMinOccurs
+	HasAttrNamespace
+	HasAttrProcessContents
+	HasElemAnnotation
 }
 
 type AnyAttribute struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"anyAttribute"`
-	hasAttrId
-	hasAttrNamespace
-	hasAttrProcessContents
-	hasElemAnnotation
+	HasAttrId
+	HasAttrNamespace
+	HasAttrProcessContents
+	HasElemAnnotation
 }
 
 type AppInfo struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"appinfo"`
-	hasAttrSource
-	hasCdata
+	HasAttrSource
+	HasCdata
 }
 
 type Attribute struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"attribute"`
-	hasAttrDefault
-	hasAttrFixed
-	hasAttrForm
-	hasAttrId
-	hasAttrName
-	hasAttrRef
-	hasAttrType
-	hasAttrUse
-	hasElemAnnotation
-	hasElemsSimpleType
+	HasAttrDefault
+	HasAttrFixed
+	HasAttrForm
+	HasAttrId
+	HasAttrName
+	HasAttrRef
+	HasAttrType
+	HasAttrUse
+	HasElemAnnotation
+	HasElemsSimpleType
 }
 
 type AttributeGroup struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"attributeGroup"`
-	hasAttrId
-	hasAttrName
-	hasAttrRef
-	hasElemAnnotation
-	hasElemsAnyAttribute
-	hasElemsAttribute
-	hasElemsAttributeGroup
+	HasAttrId
+	HasAttrName
+	HasAttrRef
+	HasElemAnnotation
+	HasElemsAnyAttribute
+	HasElemsAttribute
+	HasElemsAttributeGroup
 }
 
 type Choice struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"choice"`
-	hasAttrId
-	hasAttrMaxOccurs
-	hasAttrMinOccurs
-	hasElemAnnotation
-	hasElemsAny
-	hasElemsChoice
-	hasElemsElement `xml:"element"`
-	hasElemsGroup
-	hasElemsSequence
+	HasAttrId
+	HasAttrMaxOccurs
+	HasAttrMinOccurs
+	HasElemAnnotation
+	HasElemsAny
+	HasElemsChoice
+	HasElemsElement `xml:"element"`
+	HasElemsGroup
+	HasElemsSequence
 }
 
 type ComplexContent struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"complexContent"`
-	hasAttrId
-	hasAttrMixed
-	hasElemAnnotation
-	hasElemExtensionComplexContent
-	hasElemRestrictionComplexContent
+	HasAttrId
+	HasAttrMixed
+	HasElemAnnotation
+	HasElemExtensionComplexContent
+	HasElemRestrictionComplexContent
 }
 
 type ComplexType struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"complexType"`
-	hasAttrAbstract
-	hasAttrBlock
-	hasAttrFinal
-	hasAttrId
-	hasAttrMixed
-	hasAttrName
-	hasElemAll
-	hasElemAnnotation
-	hasElemsAnyAttribute
-	hasElemsAttribute
-	hasElemsAttributeGroup
-	hasElemChoice
-	hasElemComplexContent
-	hasElemGroup
-	hasElemSequence
-	hasElemSimpleContent
+	HasAttrAbstract
+	HasAttrBlock
+	HasAttrFinal
+	HasAttrId
+	HasAttrMixed
+	HasAttrName
+	HasElemAll
+	HasElemAnnotation
+	HasElemsAnyAttribute
+	HasElemsAttribute
+	HasElemsAttributeGroup
+	HasElemChoice
+	HasElemComplexContent
+	HasElemGroup
+	HasElemSequence
+	HasElemSimpleContent
 }
 
 type Documentation struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"documentation"`
-	hasAttrLang
-	hasAttrSource
-	hasCdata
+	HasAttrLang
+	HasAttrSource
+	HasCdata
 }
 
 type Element struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"element"`
-	hasAttrAbstract
-	hasAttrBlock
-	hasAttrDefault
-	hasAttrFinal
-	hasAttrFixed
-	hasAttrForm
-	hasAttrId
-	hasAttrMaxOccurs
-	hasAttrMinOccurs
-	hasAttrName
-	hasAttrNillable
-	hasAttrRef
-	hasAttrSubstitutionGroup
-	hasAttrType
-	hasElemAnnotation
-	hasElemComplexType
-	hasElemsKey
-	hasElemKeyRef
-	hasElemsSimpleType
-	hasElemUnique
+	HasAttrAbstract
+	HasAttrBlock
+	HasAttrDefault
+	HasAttrFinal
+	HasAttrFixed
+	HasAttrForm
+	HasAttrId
+	HasAttrMaxOccurs
+	HasAttrMinOccurs
+	HasAttrName
+	HasAttrNillable
+	HasAttrRef
+	HasAttrSubstitutionGroup
+	HasAttrType
+	HasElemAnnotation
+	HasElemComplexType
+	HasElemsKey
+	HasElemKeyRef
+	HasElemsSimpleType
+	HasElemUnique
 }
 
 type ExtensionComplexContent struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"extension"`
-	hasAttrBase
-	hasAttrId
-	hasElemAll
-	hasElemAnnotation
-	hasElemsAnyAttribute
-	hasElemsAttribute
-	hasElemsAttributeGroup
-	hasElemsChoice
-	hasElemsGroup
-	hasElemsSequence
+	HasAttrBase
+	HasAttrId
+	HasElemAll
+	HasElemAnnotation
+	HasElemsAnyAttribute
+	HasElemsAttribute
+	HasElemsAttributeGroup
+	HasElemsChoice
+	HasElemsGroup
+	HasElemsSequence
 }
 
 type ExtensionSimpleContent struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"extension"`
-	hasAttrBase
-	hasAttrId
-	hasElemAnnotation
-	hasElemsAnyAttribute
-	hasElemsAttribute
-	hasElemsAttributeGroup
+	HasAttrBase
+	HasAttrId
+	HasElemAnnotation
+	HasElemsAnyAttribute
+	HasElemsAttribute
+	HasElemsAttributeGroup
 }
 
 type Field struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"field"`
-	hasAttrId
-	hasAttrXpath
-	hasElemAnnotation
+	HasAttrId
+	HasAttrXpath
+	HasElemAnnotation
 }
 
 type Group struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"group"`
-	hasAttrId
-	hasAttrMaxOccurs
-	hasAttrMinOccurs
-	hasAttrName
-	hasAttrRef
-	hasElemAll
-	hasElemAnnotation
-	hasElemChoice
-	hasElemSequence
+	HasAttrId
+	HasAttrMaxOccurs
+	HasAttrMinOccurs
+	HasAttrName
+	HasAttrRef
+	HasElemAll
+	HasElemAnnotation
+	HasElemChoice
+	HasElemSequence
 }
 
 type Include struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"include"`
-	hasAttrId
-	hasAttrSchemaLocation
-	hasElemAnnotation
+	HasAttrId
+	HasAttrSchemaLocation
+	HasElemAnnotation
 }
 
 type Import struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"import"`
-	hasAttrId
-	hasAttrNamespace
-	hasAttrSchemaLocation
-	hasElemAnnotation
+	HasAttrId
+	HasAttrNamespace
+	HasAttrSchemaLocation
+	HasElemAnnotation
 }
 
 type Key struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"key"`
-	hasAttrId
-	hasAttrName
-	hasElemAnnotation
-	hasElemField
-	hasElemSelector
+	HasAttrId
+	HasAttrName
+	HasElemAnnotation
+	HasElemField
+	HasElemSelector
 }
 
 type KeyRef struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"keyref"`
-	hasAttrId
-	hasAttrName
-	hasAttrRefer
-	hasElemAnnotation
-	hasElemField
-	hasElemSelector
+	HasAttrId
+	HasAttrName
+	HasAttrRefer
+	HasElemAnnotation
+	HasElemField
+	HasElemSelector
 }
 
 type List struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"list"`
-	hasAttrId
-	hasAttrItemType
-	hasElemAnnotation
-	hasElemsSimpleType
+	HasAttrId
+	HasAttrItemType
+	HasElemAnnotation
+	HasElemsSimpleType
 }
 
 type Notation struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"notation"`
-	hasAttrId
-	hasAttrName
-	hasAttrPublic
-	hasAttrSystem
-	hasElemAnnotation
+	HasAttrId
+	HasAttrName
+	HasAttrPublic
+	HasAttrSystem
+	HasElemAnnotation
 }
 
 type Redefine struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"redefine"`
-	hasAttrId
-	hasAttrSchemaLocation
-	hasElemAnnotation
-	hasElemsAttributeGroup
-	hasElemsComplexType
-	hasElemsGroup
-	hasElemsSimpleType
+	HasAttrId
+	HasAttrSchemaLocation
+	HasElemAnnotation
+	HasElemsAttributeGroup
+	HasElemsComplexType
+	HasElemsGroup
+	HasElemsSimpleType
 }
 
 type RestrictionComplexContent struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"restriction"`
-	hasAttrBase
-	hasAttrId
-	hasElemAll
-	hasElemAnnotation
-	hasElemsAnyAttribute
-	hasElemsAttribute
-	hasElemsAttributeGroup
-	hasElemsChoice
-	hasElemsSequence
+	HasAttrBase
+	HasAttrId
+	HasElemAll
+	HasElemAnnotation
+	HasElemsAnyAttribute
+	HasElemsAttribute
+	HasElemsAttributeGroup
+	HasElemsChoice
+	HasElemsSequence
 }
 
 type RestrictionSimpleContent struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"restriction"`
-	hasAttrBase
-	hasAttrId
-	hasElemAnnotation
-	hasElemsAnyAttribute
-	hasElemsAttribute
-	hasElemsAttributeGroup
-	hasElemsEnumeration
-	hasElemFractionDigits
-	hasElemLength
-	hasElemMaxExclusive
-	hasElemMaxInclusive
-	hasElemMaxLength
-	hasElemMinExclusive
-	hasElemMinInclusive
-	hasElemMinLength
-	hasElemPattern
-	hasElemsSimpleType
-	hasElemTotalDigits
-	hasElemWhiteSpace
+	HasAttrBase
+	HasAttrId
+	HasElemAnnotation
+	HasElemsAnyAttribute
+	HasElemsAttribute
+	HasElemsAttributeGroup
+	HasElemsEnumeration
+	HasElemFractionDigits
+	HasElemLength
+	HasElemMaxExclusive
+	HasElemMaxInclusive
+	HasElemMaxLength
+	HasElemMinExclusive
+	HasElemMinInclusive
+	HasElemMinLength
+	HasElemPattern
+	HasElemsSimpleType
+	HasElemTotalDigits
+	HasElemWhiteSpace
 }
 
 type RestrictionSimpleEnumeration struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"enumeration"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleFractionDigits struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"fractionDigits"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleLength struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"length"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleMaxExclusive struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"maxExclusive"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleMaxInclusive struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"maxInclusive"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleMaxLength struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"maxLength"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleMinExclusive struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"minExclusive"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleMinInclusive struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"minInclusive"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleMinLength struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"minLength"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimplePattern struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"pattern"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleTotalDigits struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"totalDigits"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type RestrictionSimpleType struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"restriction"`
-	hasAttrBase
-	hasAttrId
-	hasElemAnnotation
-	hasElemsEnumeration
-	hasElemFractionDigits
-	hasElemLength
-	hasElemMaxExclusive
-	hasElemMaxInclusive
-	hasElemMaxLength
-	hasElemMinExclusive
-	hasElemMinInclusive
-	hasElemMinLength
-	hasElemPattern
-	hasElemsSimpleType
-	hasElemTotalDigits
-	hasElemWhiteSpace
+	HasAttrBase
+	HasAttrId
+	HasElemAnnotation
+	HasElemsEnumeration
+	HasElemFractionDigits
+	HasElemLength
+	HasElemMaxExclusive
+	HasElemMaxInclusive
+	HasElemMaxLength
+	HasElemMinExclusive
+	HasElemMinInclusive
+	HasElemMinLength
+	HasElemPattern
+	HasElemsSimpleType
+	HasElemTotalDigits
+	HasElemWhiteSpace
 }
 
 type RestrictionSimpleWhiteSpace struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"whiteSpace"`
-	hasAttrValue
+	HasAttrValue
 }
 
 type Selector struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"selector"`
-	hasAttrId
-	hasAttrXpath
-	hasElemAnnotation
+	HasAttrId
+	HasAttrXpath
+	HasElemAnnotation
 }
 
 type Sequence struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"sequence"`
-	hasAttrId
-	hasAttrMaxOccurs
-	hasAttrMinOccurs
-	hasElemAnnotation
-	hasElemsAny
-	hasElemsChoice
-	hasElemsElement `xml:"element"`
-	hasElemsGroup
-	hasElemsSequence
+	HasAttrId
+	HasAttrMaxOccurs
+	HasAttrMinOccurs
+	HasElemAnnotation
+	HasElemsAny
+	HasElemsChoice
+	HasElemsElement `xml:"element"`
+	HasElemsGroup
+	HasElemsSequence
 }
 
 type SimpleContent struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"simpleContent"`
-	hasAttrId
-	hasElemAnnotation
-	hasElemExtensionSimpleContent
-	hasElemRestrictionSimpleContent
+	HasAttrId
+	HasElemAnnotation
+	HasElemExtensionSimpleContent
+	HasElemRestrictionSimpleContent
 }
 
 type SimpleType struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"simpleType"`
-	hasAttrFinal
-	hasAttrId
-	hasAttrName
-	hasElemAnnotation
-	hasElemList
-	hasElemRestrictionSimpleType
-	hasElemUnion
+	HasAttrFinal
+	HasAttrId
+	HasAttrName
+	HasElemAnnotation
+	HasElemList
+	HasElemRestrictionSimpleType
+	HasElemUnion
 }
 
 type Union struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"union"`
-	hasAttrId
-	hasAttrMemberTypes
-	hasElemAnnotation
-	hasElemsSimpleType
+	HasAttrId
+	HasAttrMemberTypes
+	HasElemAnnotation
+	HasElemsSimpleType
 }
 
 type Unique struct {
-	elemBase
+	ElemBase
 	//	XMLName xml.Name `xml:"unique"`
-	hasAttrId
-	hasAttrName
-	hasElemAnnotation
-	hasElemField
-	hasElemSelector
+	HasAttrId
+	HasAttrName
+	HasElemAnnotation
+	HasElemField
+	HasElemSelector
 }
 
 func Flattened(choices []*Choice, seqs []*Sequence) (allChoices []*Choice, allSeqs []*Sequence) {

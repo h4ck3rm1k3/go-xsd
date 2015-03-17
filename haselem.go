@@ -1,197 +1,197 @@
 package xsd
 
-type hasCdata struct {
+type HasCdata struct {
 	CDATA string `xml:",chardata"`
 }
 
-type hasElemAll struct {
+type HasElemAll struct {
 	All *All `xml:"all"`
 }
 
-type hasElemAnnotation struct {
+type HasElemAnnotation struct {
 	Annotation *Annotation `xml:"annotation"`
 }
 
-type hasElemsAny struct {
+type HasElemsAny struct {
 	Anys []*Any `xml:"any"`
 }
 
-type hasElemsAnyAttribute struct {
+type HasElemsAnyAttribute struct {
 	AnyAttributes []*AnyAttribute `xml:"anyAttribute"`
 }
 
-type hasElemsAppInfo struct {
+type HasElemsAppInfo struct {
 	AppInfos []*AppInfo `xml:"appinfo"`
 }
 
-type hasElemsAttribute struct {
+type HasElemsAttribute struct {
 	Attributes []*Attribute `xml:"attribute"`
 }
 
-type hasElemsAttributeGroup struct {
+type HasElemsAttributeGroup struct {
 	AttributeGroups []*AttributeGroup `xml:"attributeGroup"`
 }
 
-type hasElemChoice struct {
+type HasElemChoice struct {
 	Choice *Choice `xml:"choice"`
 }
 
-type hasElemsChoice struct {
+type HasElemsChoice struct {
 	Choices []*Choice `xml:"choice"`
 }
 
-type hasElemComplexContent struct {
+type HasElemComplexContent struct {
 	ComplexContent *ComplexContent `xml:"complexContent"`
 }
 
-type hasElemComplexType struct {
+type HasElemComplexType struct {
 	ComplexType *ComplexType `xml:"complexType"`
 }
 
-type hasElemsComplexType struct {
+type HasElemsComplexType struct {
 	ComplexTypes []*ComplexType `xml:"complexType"`
 }
 
-type hasElemsDocumentation struct {
+type HasElemsDocumentation struct {
 	Documentations []*Documentation `xml:"documentation"`
 }
 
-type hasElemsElement struct {
+type HasElemsElement struct {
 	Elements []*Element `xml:"element"`
 }
 
-type hasElemsEnumeration struct {
+type HasElemsEnumeration struct {
 	Enumerations []*RestrictionSimpleEnumeration `xml:"enumeration"`
 }
 
-type hasElemExtensionComplexContent struct {
+type HasElemExtensionComplexContent struct {
 	ExtensionComplexContent *ExtensionComplexContent `xml:"extension"`
 }
 
-type hasElemExtensionSimpleContent struct {
+type HasElemExtensionSimpleContent struct {
 	ExtensionSimpleContent *ExtensionSimpleContent `xml:"extension"`
 }
 
-type hasElemField struct {
+type HasElemField struct {
 	Field *Field `xml:"field"`
 }
 
-type hasElemFractionDigits struct {
+type HasElemFractionDigits struct {
 	FractionDigits *RestrictionSimpleFractionDigits `xml:"fractionDigits"`
 }
 
-type hasElemGroup struct {
+type HasElemGroup struct {
 	Group *Group `xml:"group"`
 }
 
-type hasElemsGroup struct {
+type HasElemsGroup struct {
 	Groups []*Group `xml:"group"`
 }
 
-type hasElemsImport struct {
+type HasElemsImport struct {
 	Imports []*Import `xml:"import"`
 }
 
-type hasElemsInclude struct {
+type HasElemsInclude struct {
 	Includes []*Include `xml:"include"`
 }
 
-type hasElemsKey struct {
+type HasElemsKey struct {
 	Keys []*Key `xml:"key"`
 }
 
-type hasElemKeyRef struct {
+type HasElemKeyRef struct {
 	KeyRef *KeyRef `xml:"keyref"`
 }
 
-type hasElemLength struct {
+type HasElemLength struct {
 	Length *RestrictionSimpleLength `xml:"length"`
 }
 
-type hasElemList struct {
+type HasElemList struct {
 	List *List `xml:"list"`
 }
 
-type hasElemMaxExclusive struct {
+type HasElemMaxExclusive struct {
 	MaxExclusive *RestrictionSimpleMaxExclusive `xml:"maxExclusive"`
 }
 
-type hasElemMaxInclusive struct {
+type HasElemMaxInclusive struct {
 	MaxInclusive *RestrictionSimpleMaxInclusive `xml:"maxInclusive"`
 }
 
-type hasElemMaxLength struct {
+type HasElemMaxLength struct {
 	MaxLength *RestrictionSimpleMaxLength `xml:"maxLength"`
 }
 
-type hasElemMinExclusive struct {
+type HasElemMinExclusive struct {
 	MinExclusive *RestrictionSimpleMinExclusive `xml:"minExclusive"`
 }
 
-type hasElemMinInclusive struct {
+type HasElemMinInclusive struct {
 	MinInclusive *RestrictionSimpleMinInclusive `xml:"minInclusive"`
 }
 
-type hasElemMinLength struct {
+type HasElemMinLength struct {
 	MinLength *RestrictionSimpleMinLength `xml:"minLength"`
 }
 
-type hasElemsNotation struct {
+type HasElemsNotation struct {
 	Notations []*Notation `xml:"notation"`
 }
 
-type hasElemPattern struct {
+type HasElemPattern struct {
 	Pattern *RestrictionSimplePattern `xml:"pattern"`
 }
 
-type hasElemsRedefine struct {
+type HasElemsRedefine struct {
 	Redefines []*Redefine `xml:"redefine"`
 }
 
-type hasElemRestrictionComplexContent struct {
+type HasElemRestrictionComplexContent struct {
 	RestrictionComplexContent *RestrictionComplexContent `xml:"restriction"`
 }
 
-type hasElemRestrictionSimpleContent struct {
+type HasElemRestrictionSimpleContent struct {
 	RestrictionSimpleContent *RestrictionSimpleContent `xml:"restriction"`
 }
 
-type hasElemRestrictionSimpleType struct {
+type HasElemRestrictionSimpleType struct {
 	RestrictionSimpleType *RestrictionSimpleType `xml:"restriction"`
 }
 
-type hasElemSelector struct {
+type HasElemSelector struct {
 	Selector *Selector `xml:"selector"`
 }
 
-type hasElemSequence struct {
+type HasElemSequence struct {
 	Sequence *Sequence `xml:"sequence"`
 }
 
-type hasElemsSequence struct {
+type HasElemsSequence struct {
 	Sequences []*Sequence `xml:"sequence"`
 }
 
-type hasElemSimpleContent struct {
+type HasElemSimpleContent struct {
 	SimpleContent *SimpleContent `xml:"simpleContent"`
 }
 
-type hasElemsSimpleType struct {
+type HasElemsSimpleType struct {
 	SimpleTypes []*SimpleType `xml:"simpleType"`
 }
 
-type hasElemTotalDigits struct {
+type HasElemTotalDigits struct {
 	TotalDigits *RestrictionSimpleTotalDigits `xml:"totalDigits"`
 }
 
-type hasElemUnion struct {
+type HasElemUnion struct {
 	Union *Union `xml:"union"`
 }
 
-type hasElemUnique struct {
+type HasElemUnique struct {
 	Unique *Unique `xml:"unique"`
 }
 
-type hasElemWhiteSpace struct {
+type HasElemWhiteSpace struct {
 	WhiteSpace *RestrictionSimpleWhiteSpace `xml:"whiteSpace"`
 }

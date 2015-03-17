@@ -167,7 +167,7 @@ func (me *PkgBag) appendFmt(addLineAfter bool, format string, fmtArgs ...interfa
 
 func (me *PkgBag) assembleSource() string {
 
-	fmt.Printf("assembleSource %v", me)
+	//fmt.Printf("assembleSource %v", me)
 
 	var (
 		dt     *declType
@@ -460,6 +460,7 @@ func (me *declType) equivalentTo(dt *declType) bool {
 }
 
 func (me *declType) render(bag *PkgBag) {
+	fmt.Printf("makepkg render %v\n", me.Name)
 	if !me.rendered {
 		me.rendered = true
 		if me.checkForEquivalents(bag); len(me.EquivalentTo) == 0 {
@@ -484,9 +485,11 @@ func (me *declType) render(bag *PkgBag) {
 			} else {
 				bag.appendFmt(false, "type %s struct {", myName)
 				for _, f := range me.Fields {
+					fmt.Printf("makepkg render field %v\n", f.Name)
 					f.render(bag, me)
 				}
 				for _, e := range me.Embeds {
+					fmt.Printf("makepkg render embed %v\n", e.Name)
 					e.render(bag, me)
 				}
 				bag.appendFmt(true, "}")

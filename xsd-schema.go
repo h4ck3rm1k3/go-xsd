@@ -30,7 +30,7 @@ var (
 )
 
 type Schema struct {
-	elemBase
+	ElemBase
 	XMLName            xml.Name          `xml:"schema"`
 	XMLNamespacePrefix string            `xml:"-"`
 	XMLNamespaces      map[string]string `xml:"-"`
@@ -38,26 +38,26 @@ type Schema struct {
 	XSDNamespacePrefix string            `xml:"-"`
 	XSDParentSchema    *Schema           `xml:"-"`
 
-	hasAttrAttributeFormDefault
-	hasAttrBlockDefault
-	hasAttrElementFormDefault
-	hasAttrFinalDefault
-	hasAttrLang
-	hasAttrId
-	hasAttrSchemaLocation
-	hasAttrTargetNamespace
-	hasAttrVersion
-	hasElemAnnotation
-	hasElemsAttribute
-	hasElemsAttributeGroup `xml:"attributeGroup"`
-	hasElemsComplexType
-	hasElemsElement `xml:"element"`
-	hasElemsGroup `xml:"group"`
-	hasElemsInclude
-	hasElemsImport
-	hasElemsNotation
-	hasElemsRedefine
-	hasElemsSimpleType
+	HasAttrAttributeFormDefault
+	HasAttrBlockDefault
+	HasAttrElementFormDefault
+	HasAttrFinalDefault
+	HasAttrLang
+	HasAttrId
+	HasAttrSchemaLocation
+	HasAttrTargetNamespace
+	HasAttrVersion
+	HasElemAnnotation
+	HasElemsAttribute
+	HasElemsAttributeGroup
+	HasElemsComplexType
+	HasElemsElement 
+	HasElemsGroup 
+	HasElemsInclude
+	HasElemsImport
+	HasElemsNotation
+	HasElemsRedefine
+	HasElemsSimpleType
 
 	loadLocalPath, loadUri string
 }
@@ -170,16 +170,16 @@ func (me *Schema) MakeGoPkgSrcFile() (goOutFilePath string, err error) {
 	for _, inc := range me.allSchemas(loadedSchemas) {
 		bag.Schema = inc
 		//fmt.Printf("Bag %v\n", bag)
-		fmt.Printf("Bag allElems %v\n", bag.allElems)
+		//fmt.Printf("Bag allElems %v\n", bag.allElems)
 		inc.makePkg(bag)
 	}
 	bag.Schema = me
-	me.hasElemAnnotation.makePkg(bag)
+	me.HasElemAnnotation.makePkg(bag)
 	bag.appendFmt(true, "")
 	me.makePkg(bag)
 
 	//fmt.Printf("Bag2 %v\n", bag)
-	fmt.Printf("Bag2 allElems %v\n", bag.allElems)
+	//fmt.Printf("Bag2 allElems %v\n", bag.allElems)
 
 	if err = ufs.EnsureDirExists(filepath.Dir(goOutFilePath)); err == nil {
 		err = ufs.WriteTextFile(goOutFilePath, bag.assembleSource())

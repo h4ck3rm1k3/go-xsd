@@ -1,333 +1,333 @@
 package xsd
-import "fmt"
+//import "fmt"
 
 func (me *All) initElement(parent element) {
-	me.elemBase.init(parent, me, "all", &me.hasAttrId, &me.hasAttrMaxOccurs, &me.hasAttrMinOccurs)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsElement.initChildren(me)
+	me.ElemBase.init(parent, me, "all", &me.HasAttrId, &me.HasAttrMaxOccurs, &me.HasAttrMinOccurs)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsElement.initChildren(me)
 }
 
 func (me *Annotation) initElement(parent element) {
-	me.elemBase.init(parent, me, "annotation")
-	me.hasElemsAppInfo.initChildren(me)
-	me.hasElemsDocumentation.initChildren(me)
+	me.ElemBase.init(parent, me, "annotation")
+	me.HasElemsAppInfo.initChildren(me)
+	me.HasElemsDocumentation.initChildren(me)
 }
 
 func (me *Any) initElement(parent element) {
-	me.elemBase.init(parent, me, "any", &me.hasAttrId, &me.hasAttrNamespace, &me.hasAttrMaxOccurs, &me.hasAttrMinOccurs, &me.hasAttrProcessContents)
-	me.hasElemAnnotation.initChildren(me)
+	me.ElemBase.init(parent, me, "any", &me.HasAttrId, &me.HasAttrNamespace, &me.HasAttrMaxOccurs, &me.HasAttrMinOccurs, &me.HasAttrProcessContents)
+	me.HasElemAnnotation.initChildren(me)
 }
 
 func (me *AnyAttribute) initElement(parent element) {
-	me.elemBase.init(parent, me, "anyAttribute", &me.hasAttrId, &me.hasAttrNamespace, &me.hasAttrProcessContents)
-	me.hasElemAnnotation.initChildren(me)
+	me.ElemBase.init(parent, me, "anyAttribute", &me.HasAttrId, &me.HasAttrNamespace, &me.HasAttrProcessContents)
+	me.HasElemAnnotation.initChildren(me)
 }
 
 func (me *AppInfo) initElement(parent element) {
-	me.elemBase.init(parent, me, "appInfo", &me.hasAttrSource)
+	me.ElemBase.init(parent, me, "appInfo", &me.HasAttrSource)
 }
 
 func (me *Attribute) initElement(parent element) {
-	me.elemBase.init(parent, me, "attribute", &me.hasAttrDefault, &me.hasAttrFixed, &me.hasAttrForm, &me.hasAttrId, &me.hasAttrName, &me.hasAttrRef, &me.hasAttrType, &me.hasAttrUse)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsSimpleType.initChildren(me)
+	me.ElemBase.init(parent, me, "attribute", &me.HasAttrDefault, &me.HasAttrFixed, &me.HasAttrForm, &me.HasAttrId, &me.HasAttrName, &me.HasAttrRef, &me.HasAttrType, &me.HasAttrUse)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsSimpleType.initChildren(me)
 }
 
 func (me *AttributeGroup) initElement(parent element) {
-	fmt.Printf("initElement %v\n", me)
-	fmt.Printf("initElement %v\n", parent)
-	me.elemBase.init(parent, me, "attributeGroup", &me.hasAttrId, &me.hasAttrName, &me.hasAttrRef)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsAttribute.initChildren(me)
-	me.hasElemsAnyAttribute.initChildren(me)
-	me.hasElemsAttributeGroup.initChildren(me)
+	//fmt.Printf("initElement %v\n", me)
+	//fmt.Printf("initElement %v\n", parent)
+	me.ElemBase.init(parent, me, "attributeGroup", &me.HasAttrId, &me.HasAttrName, &me.HasAttrRef)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsAttribute.initChildren(me)
+	me.HasElemsAnyAttribute.initChildren(me)
+	me.HasElemsAttributeGroup.initChildren(me)
 }
 
 func (me *Choice) initElement(parent element) {
-	me.elemBase.init(parent, me, "choice", &me.hasAttrId, &me.hasAttrMaxOccurs, &me.hasAttrMinOccurs)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsAny.initChildren(me)
-	me.hasElemsChoice.initChildren(me)
-	me.hasElemsElement.initChildren(me)
-	me.hasElemsGroup.initChildren(me)
-	me.hasElemsSequence.initChildren(me)
+	me.ElemBase.init(parent, me, "choice", &me.HasAttrId, &me.HasAttrMaxOccurs, &me.HasAttrMinOccurs)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsAny.initChildren(me)
+	me.HasElemsChoice.initChildren(me)
+	me.HasElemsElement.initChildren(me)
+	me.HasElemsGroup.initChildren(me)
+	me.HasElemsSequence.initChildren(me)
 }
 
 func (me *ComplexContent) initElement(parent element) {
-	me.elemBase.init(parent, me, "complexContent", &me.hasAttrId, &me.hasAttrMixed)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemExtensionComplexContent.initChildren(me)
-	me.hasElemRestrictionComplexContent.initChildren(me)
+	me.ElemBase.init(parent, me, "complexContent", &me.HasAttrId, &me.HasAttrMixed)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemExtensionComplexContent.initChildren(me)
+	me.HasElemRestrictionComplexContent.initChildren(me)
 }
 
 func (me *ComplexType) initElement(parent element) {
-	fmt.Printf("initElement %v\n", me)
-	fmt.Printf("initElement %v\n", parent)
-	me.elemBase.init(parent, me, "complexType", &me.hasAttrAbstract, &me.hasAttrBlock, &me.hasAttrFinal, &me.hasAttrId, &me.hasAttrMixed, &me.hasAttrName)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemAll.initChildren(me)
-	me.hasElemChoice.initChildren(me)
-	me.hasElemsAttribute.initChildren(me)
-	me.hasElemGroup.initChildren(me)
-	me.hasElemSequence.initChildren(me)
-	me.hasElemComplexContent.initChildren(me)
-	me.hasElemSimpleContent.initChildren(me)
-	me.hasElemsAnyAttribute.initChildren(me)
-	me.hasElemsAttributeGroup.initChildren(me)
+	//fmt.Printf("initElement %v\n", me)
+	//fmt.Printf("initElement %v\n", parent)
+	me.ElemBase.init(parent, me, "complexType", &me.HasAttrAbstract, &me.HasAttrBlock, &me.HasAttrFinal, &me.HasAttrId, &me.HasAttrMixed, &me.HasAttrName)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemAll.initChildren(me)
+	me.HasElemChoice.initChildren(me)
+	me.HasElemsAttribute.initChildren(me)
+	me.HasElemGroup.initChildren(me)
+	me.HasElemSequence.initChildren(me)
+	me.HasElemComplexContent.initChildren(me)
+	me.HasElemSimpleContent.initChildren(me)
+	me.HasElemsAnyAttribute.initChildren(me)
+	me.HasElemsAttributeGroup.initChildren(me)
 }
 
 func (me *Documentation) initElement(parent element) {
-	me.elemBase.init(parent, me, "documentation", &me.hasAttrLang, &me.hasAttrSource)
+	me.ElemBase.init(parent, me, "documentation", &me.HasAttrLang, &me.HasAttrSource)
 }
 
 func (me *Element) initElement(parent element) {
-	me.elemBase.init(parent, me, "element", &me.hasAttrAbstract, &me.hasAttrBlock, &me.hasAttrDefault, &me.hasAttrFinal, &me.hasAttrFixed, &me.hasAttrForm, &me.hasAttrId, &me.hasAttrName, &me.hasAttrNillable, &me.hasAttrRef, &me.hasAttrType, &me.hasAttrMaxOccurs, &me.hasAttrMinOccurs, &me.hasAttrSubstitutionGroup)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemUnique.initChildren(me)
-	me.hasElemsKey.initChildren(me)
-	me.hasElemComplexType.initChildren(me)
-	me.hasElemKeyRef.initChildren(me)
-	me.hasElemsSimpleType.initChildren(me)
+	me.ElemBase.init(parent, me, "element", &me.HasAttrAbstract, &me.HasAttrBlock, &me.HasAttrDefault, &me.HasAttrFinal, &me.HasAttrFixed, &me.HasAttrForm, &me.HasAttrId, &me.HasAttrName, &me.HasAttrNillable, &me.HasAttrRef, &me.HasAttrType, &me.HasAttrMaxOccurs, &me.HasAttrMinOccurs, &me.HasAttrSubstitutionGroup)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemUnique.initChildren(me)
+	me.HasElemsKey.initChildren(me)
+	me.HasElemComplexType.initChildren(me)
+	me.HasElemKeyRef.initChildren(me)
+	me.HasElemsSimpleType.initChildren(me)
 }
 
 func (me *ExtensionComplexContent) initElement(parent element) {
-	fmt.Printf("initElement %v\n", me)
-	fmt.Printf("initElement %v\n", parent)
-	me.elemBase.init(parent, me, "extension", &me.hasAttrBase, &me.hasAttrId)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemAll.initChildren(me)
-	me.hasElemsAttribute.initChildren(me)
-	me.hasElemsChoice.initChildren(me)
-	me.hasElemsGroup.initChildren(me)
-	me.hasElemsSequence.initChildren(me)
-	me.hasElemsAnyAttribute.initChildren(me)
-	me.hasElemsAttributeGroup.initChildren(me)
+	//fmt.Printf("initElement %v\n", me)
+	//fmt.Printf("initElement %v\n", parent)
+	me.ElemBase.init(parent, me, "extension", &me.HasAttrBase, &me.HasAttrId)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemAll.initChildren(me)
+	me.HasElemsAttribute.initChildren(me)
+	me.HasElemsChoice.initChildren(me)
+	me.HasElemsGroup.initChildren(me)
+	me.HasElemsSequence.initChildren(me)
+	me.HasElemsAnyAttribute.initChildren(me)
+	me.HasElemsAttributeGroup.initChildren(me)
 }
 
 func (me *ExtensionSimpleContent) initElement(parent element) {
-	fmt.Printf("initElement %v\n", me)
-	fmt.Printf("initElement %v\n", parent)
-	me.elemBase.init(parent, me, "extension", &me.hasAttrBase, &me.hasAttrId)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsAttribute.initChildren(me)
-	me.hasElemsAnyAttribute.initChildren(me)
-	me.hasElemsAttributeGroup.initChildren(me)
+	//fmt.Printf("initElement %v\n", me)
+	//fmt.Printf("initElement %v\n", parent)
+	me.ElemBase.init(parent, me, "extension", &me.HasAttrBase, &me.HasAttrId)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsAttribute.initChildren(me)
+	me.HasElemsAnyAttribute.initChildren(me)
+	me.HasElemsAttributeGroup.initChildren(me)
 }
 
 func (me *Field) initElement(parent element) {
-	me.elemBase.init(parent, me, "field", &me.hasAttrId, &me.hasAttrXpath)
-	me.hasElemAnnotation.initChildren(me)
+	me.ElemBase.init(parent, me, "field", &me.HasAttrId, &me.HasAttrXpath)
+	me.HasElemAnnotation.initChildren(me)
 }
 
 func (me *Group) initElement(parent element) {
-	me.elemBase.init(parent, me, "group", &me.hasAttrId, &me.hasAttrName, &me.hasAttrRef, &me.hasAttrMaxOccurs, &me.hasAttrMinOccurs)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemAll.initChildren(me)
-	me.hasElemChoice.initChildren(me)
-	me.hasElemSequence.initChildren(me)
+	me.ElemBase.init(parent, me, "group", &me.HasAttrId, &me.HasAttrName, &me.HasAttrRef, &me.HasAttrMaxOccurs, &me.HasAttrMinOccurs)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemAll.initChildren(me)
+	me.HasElemChoice.initChildren(me)
+	me.HasElemSequence.initChildren(me)
 }
 
 func (me *Import) initElement(parent element) {
-	me.elemBase.init(parent, me, "import", &me.hasAttrId, &me.hasAttrNamespace, &me.hasAttrSchemaLocation)
-	me.hasElemAnnotation.initChildren(me)
+	me.ElemBase.init(parent, me, "import", &me.HasAttrId, &me.HasAttrNamespace, &me.HasAttrSchemaLocation)
+	me.HasElemAnnotation.initChildren(me)
 }
 
 func (me *Key) initElement(parent element) {
-	me.elemBase.init(parent, me, "key", &me.hasAttrId, &me.hasAttrName)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemField.initChildren(me)
-	me.hasElemSelector.initChildren(me)
+	me.ElemBase.init(parent, me, "key", &me.HasAttrId, &me.HasAttrName)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemField.initChildren(me)
+	me.HasElemSelector.initChildren(me)
 }
 
 func (me *KeyRef) initElement(parent element) {
-	me.elemBase.init(parent, me, "keyref", &me.hasAttrId, &me.hasAttrName, &me.hasAttrRefer)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemField.initChildren(me)
-	me.hasElemSelector.initChildren(me)
+	me.ElemBase.init(parent, me, "keyref", &me.HasAttrId, &me.HasAttrName, &me.HasAttrRefer)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemField.initChildren(me)
+	me.HasElemSelector.initChildren(me)
 }
 
 func (me *List) initElement(parent element) {
-	me.elemBase.init(parent, me, "list", &me.hasAttrId, &me.hasAttrItemType)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsSimpleType.initChildren(me)
+	me.ElemBase.init(parent, me, "list", &me.HasAttrId, &me.HasAttrItemType)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsSimpleType.initChildren(me)
 }
 
 func (me *Notation) initElement(parent element) {
-	me.elemBase.init(parent, me, "notation", &me.hasAttrId, &me.hasAttrName, &me.hasAttrPublic, &me.hasAttrSystem)
-	me.hasElemAnnotation.initChildren(me)
+	me.ElemBase.init(parent, me, "notation", &me.HasAttrId, &me.HasAttrName, &me.HasAttrPublic, &me.HasAttrSystem)
+	me.HasElemAnnotation.initChildren(me)
 }
 
 func (me *Redefine) initElement(parent element) {
-	fmt.Printf("initElement %v\n", me)
-	fmt.Printf("initElement %v\n", parent)
+	//fmt.Printf("initElement %v\n", me)
+	//fmt.Printf("initElement %v\n", parent)
 
-	me.elemBase.init(parent, me, "redefine", &me.hasAttrId, &me.hasAttrSchemaLocation)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsGroup.initChildren(me)
-	me.hasElemsAttributeGroup.initChildren(me)
-	me.hasElemsComplexType.initChildren(me)
-	me.hasElemsSimpleType.initChildren(me)
+	me.ElemBase.init(parent, me, "redefine", &me.HasAttrId, &me.HasAttrSchemaLocation)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsGroup.initChildren(me)
+	me.HasElemsAttributeGroup.initChildren(me)
+	me.HasElemsComplexType.initChildren(me)
+	me.HasElemsSimpleType.initChildren(me)
 }
 
 func (me *RestrictionComplexContent) initElement(parent element) {
-	fmt.Printf("initElement %v\n", me)
-	fmt.Printf("initElement %v\n", parent)
-	me.elemBase.init(parent, me, "restriction", &me.hasAttrBase, &me.hasAttrId)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemAll.initChildren(me)
-	me.hasElemsAttribute.initChildren(me)
-	me.hasElemsChoice.initChildren(me)
-	me.hasElemsSequence.initChildren(me)
-	me.hasElemsAnyAttribute.initChildren(me)
-	me.hasElemsAttributeGroup.initChildren(me)
+	//fmt.Printf("initElement %v\n", me)
+	//fmt.Printf("initElement %v\n", parent)
+	me.ElemBase.init(parent, me, "restriction", &me.HasAttrBase, &me.HasAttrId)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemAll.initChildren(me)
+	me.HasElemsAttribute.initChildren(me)
+	me.HasElemsChoice.initChildren(me)
+	me.HasElemsSequence.initChildren(me)
+	me.HasElemsAnyAttribute.initChildren(me)
+	me.HasElemsAttributeGroup.initChildren(me)
 }
 
 func (me *RestrictionSimpleContent) initElement(parent element) {
-	fmt.Printf("initElement %v\n", me)
-	fmt.Printf("initElement %v\n", parent)
-	me.elemBase.init(parent, me, "restriction", &me.hasAttrBase, &me.hasAttrId)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemLength.initChildren(me)
-	me.hasElemPattern.initChildren(me)
-	me.hasElemsAttribute.initChildren(me)
-	me.hasElemsEnumeration.initChildren(me)
-	me.hasElemFractionDigits.initChildren(me)
-	me.hasElemMaxExclusive.initChildren(me)
-	me.hasElemMaxInclusive.initChildren(me)
-	me.hasElemMaxLength.initChildren(me)
-	me.hasElemMinExclusive.initChildren(me)
-	me.hasElemMinInclusive.initChildren(me)
-	me.hasElemMinLength.initChildren(me)
-	me.hasElemTotalDigits.initChildren(me)
-	me.hasElemWhiteSpace.initChildren(me)
-	me.hasElemsAnyAttribute.initChildren(me)
-	me.hasElemsAttributeGroup.initChildren(me)
-	me.hasElemsSimpleType.initChildren(me)
+	//fmt.Printf("initElement %v\n", me)
+	//fmt.Printf("initElement %v\n", parent)
+	me.ElemBase.init(parent, me, "restriction", &me.HasAttrBase, &me.HasAttrId)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemLength.initChildren(me)
+	me.HasElemPattern.initChildren(me)
+	me.HasElemsAttribute.initChildren(me)
+	me.HasElemsEnumeration.initChildren(me)
+	me.HasElemFractionDigits.initChildren(me)
+	me.HasElemMaxExclusive.initChildren(me)
+	me.HasElemMaxInclusive.initChildren(me)
+	me.HasElemMaxLength.initChildren(me)
+	me.HasElemMinExclusive.initChildren(me)
+	me.HasElemMinInclusive.initChildren(me)
+	me.HasElemMinLength.initChildren(me)
+	me.HasElemTotalDigits.initChildren(me)
+	me.HasElemWhiteSpace.initChildren(me)
+	me.HasElemsAnyAttribute.initChildren(me)
+	me.HasElemsAttributeGroup.initChildren(me)
+	me.HasElemsSimpleType.initChildren(me)
 }
 
 func (me *RestrictionSimpleEnumeration) initElement(parent element) {
-	me.elemBase.init(parent, me, "enumeration", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "enumeration", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleFractionDigits) initElement(parent element) {
-	me.elemBase.init(parent, me, "fractionDigits", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "fractionDigits", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleLength) initElement(parent element) {
-	me.elemBase.init(parent, me, "length", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "length", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleMaxExclusive) initElement(parent element) {
-	me.elemBase.init(parent, me, "maxExclusive", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "maxExclusive", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleMaxInclusive) initElement(parent element) {
-	me.elemBase.init(parent, me, "maxInclusive", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "maxInclusive", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleMaxLength) initElement(parent element) {
-	me.elemBase.init(parent, me, "maxLength", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "maxLength", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleMinExclusive) initElement(parent element) {
-	me.elemBase.init(parent, me, "minExclusive", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "minExclusive", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleMinInclusive) initElement(parent element) {
-	me.elemBase.init(parent, me, "minInclusive", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "minInclusive", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleMinLength) initElement(parent element) {
-	me.elemBase.init(parent, me, "minLength", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "minLength", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimplePattern) initElement(parent element) {
-	me.elemBase.init(parent, me, "pattern", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "pattern", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleTotalDigits) initElement(parent element) {
-	me.elemBase.init(parent, me, "totalDigits", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "totalDigits", &me.HasAttrValue)
 }
 
 func (me *RestrictionSimpleType) initElement(parent element) {
-	me.elemBase.init(parent, me, "restriction", &me.hasAttrBase, &me.hasAttrId)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemLength.initChildren(me)
-	me.hasElemPattern.initChildren(me)
-	me.hasElemsEnumeration.initChildren(me)
-	me.hasElemFractionDigits.initChildren(me)
-	me.hasElemMaxExclusive.initChildren(me)
-	me.hasElemMaxInclusive.initChildren(me)
-	me.hasElemMaxLength.initChildren(me)
-	me.hasElemMinExclusive.initChildren(me)
-	me.hasElemMinInclusive.initChildren(me)
-	me.hasElemMinLength.initChildren(me)
-	me.hasElemTotalDigits.initChildren(me)
-	me.hasElemWhiteSpace.initChildren(me)
-	me.hasElemsSimpleType.initChildren(me)
+	me.ElemBase.init(parent, me, "restriction", &me.HasAttrBase, &me.HasAttrId)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemLength.initChildren(me)
+	me.HasElemPattern.initChildren(me)
+	me.HasElemsEnumeration.initChildren(me)
+	me.HasElemFractionDigits.initChildren(me)
+	me.HasElemMaxExclusive.initChildren(me)
+	me.HasElemMaxInclusive.initChildren(me)
+	me.HasElemMaxLength.initChildren(me)
+	me.HasElemMinExclusive.initChildren(me)
+	me.HasElemMinInclusive.initChildren(me)
+	me.HasElemMinLength.initChildren(me)
+	me.HasElemTotalDigits.initChildren(me)
+	me.HasElemWhiteSpace.initChildren(me)
+	me.HasElemsSimpleType.initChildren(me)
 }
 
 func (me *RestrictionSimpleWhiteSpace) initElement(parent element) {
-	me.elemBase.init(parent, me, "whiteSpace", &me.hasAttrValue)
+	me.ElemBase.init(parent, me, "whiteSpace", &me.HasAttrValue)
 }
 
 func (me *Schema) initElement(parent element) {
 
-	fmt.Printf("initElement %v\n", me)
-	fmt.Printf("initElement %v\n", parent)
+	//fmt.Printf("initElement %v\n", me)
+	//fmt.Printf("initElement %v\n", parent)
 
-	me.elemBase.init(parent, me, "schema", &me.hasAttrId, &me.hasAttrLang, &me.hasAttrVersion, &me.hasAttrBlockDefault, &me.hasAttrFinalDefault, &me.hasAttrSchemaLocation, &me.hasAttrTargetNamespace, &me.hasAttrAttributeFormDefault, &me.hasAttrElementFormDefault)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsAttribute.initChildren(me)
-	me.hasElemsElement.initChildren(me)
-	me.hasElemsGroup.initChildren(me)
-	me.hasElemsImport.initChildren(me)
-	me.hasElemsNotation.initChildren(me)
-	me.hasElemsRedefine.initChildren(me)
-	me.hasElemsAttributeGroup.initChildren(me)
-	me.hasElemsComplexType.initChildren(me)
-	me.hasElemsSimpleType.initChildren(me)
+	me.ElemBase.init(parent, me, "schema", &me.HasAttrId, &me.HasAttrLang, &me.HasAttrVersion, &me.HasAttrBlockDefault, &me.HasAttrFinalDefault, &me.HasAttrSchemaLocation, &me.HasAttrTargetNamespace, &me.HasAttrAttributeFormDefault, &me.HasAttrElementFormDefault)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsAttribute.initChildren(me)
+	me.HasElemsElement.initChildren(me)
+	me.HasElemsGroup.initChildren(me)
+	me.HasElemsImport.initChildren(me)
+	me.HasElemsNotation.initChildren(me)
+	me.HasElemsRedefine.initChildren(me)
+	me.HasElemsAttributeGroup.initChildren(me)
+	me.HasElemsComplexType.initChildren(me)
+	me.HasElemsSimpleType.initChildren(me)
 }
 
 func (me *Selector) initElement(parent element) {
-	me.elemBase.init(parent, me, "selector", &me.hasAttrId, &me.hasAttrXpath)
-	me.hasElemAnnotation.initChildren(me)
+	me.ElemBase.init(parent, me, "selector", &me.HasAttrId, &me.HasAttrXpath)
+	me.HasElemAnnotation.initChildren(me)
 }
 
 func (me *Sequence) initElement(parent element) {
-	me.elemBase.init(parent, me, "sequence", &me.hasAttrId, &me.hasAttrMaxOccurs, &me.hasAttrMinOccurs)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsAny.initChildren(me)
-	me.hasElemsChoice.initChildren(me)
-	me.hasElemsElement.initChildren(me)
-	me.hasElemsGroup.initChildren(me)
-	me.hasElemsSequence.initChildren(me)
+	me.ElemBase.init(parent, me, "sequence", &me.HasAttrId, &me.HasAttrMaxOccurs, &me.HasAttrMinOccurs)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsAny.initChildren(me)
+	me.HasElemsChoice.initChildren(me)
+	me.HasElemsElement.initChildren(me)
+	me.HasElemsGroup.initChildren(me)
+	me.HasElemsSequence.initChildren(me)
 }
 
 func (me *SimpleContent) initElement(parent element) {
-	me.elemBase.init(parent, me, "simpleContent", &me.hasAttrId)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemExtensionSimpleContent.initChildren(me)
-	me.hasElemRestrictionSimpleContent.initChildren(me)
+	me.ElemBase.init(parent, me, "simpleContent", &me.HasAttrId)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemExtensionSimpleContent.initChildren(me)
+	me.HasElemRestrictionSimpleContent.initChildren(me)
 }
 
 func (me *SimpleType) initElement(parent element) {
-	me.elemBase.init(parent, me, "simpleType", &me.hasAttrFinal, &me.hasAttrId, &me.hasAttrName)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemRestrictionSimpleType.initChildren(me)
-	me.hasElemList.initChildren(me)
-	me.hasElemUnion.initChildren(me)
+	me.ElemBase.init(parent, me, "simpleType", &me.HasAttrFinal, &me.HasAttrId, &me.HasAttrName)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemRestrictionSimpleType.initChildren(me)
+	me.HasElemList.initChildren(me)
+	me.HasElemUnion.initChildren(me)
 }
 
 func (me *Union) initElement(parent element) {
-	me.elemBase.init(parent, me, "union", &me.hasAttrId, &me.hasAttrMemberTypes)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemsSimpleType.initChildren(me)
+	me.ElemBase.init(parent, me, "union", &me.HasAttrId, &me.HasAttrMemberTypes)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemsSimpleType.initChildren(me)
 }
 
 func (me *Unique) initElement(parent element) {
-	me.elemBase.init(parent, me, "unique", &me.hasAttrId, &me.hasAttrName)
-	me.hasElemAnnotation.initChildren(me)
-	me.hasElemField.initChildren(me)
-	me.hasElemSelector.initChildren(me)
+	me.ElemBase.init(parent, me, "unique", &me.HasAttrId, &me.HasAttrName)
+	me.HasElemAnnotation.initChildren(me)
+	me.HasElemField.initChildren(me)
+	me.HasElemSelector.initChildren(me)
 }

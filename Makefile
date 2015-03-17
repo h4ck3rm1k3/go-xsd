@@ -1,7 +1,8 @@
 
 test: go-xsd
-	./go-xsd --gofmt=False --goinst=False  --uri file:///mnt/data/home/mdupont/experiments/odoo/openerp/addons/base/rng/view.xsd
-	./go-xsd --gofmt=False --goinst=False --uri file:///mnt/data/home/mdupont/experiments/odoo/openerp/import_xml.xsd
+	#./go-xsd --gofmt=False --goinst=False  --uri file:///mnt/data/home/mdupont/experiments/odoo/openerp/addons/base/rng/view.xsd
+	#./go-xsd --gofmt=False --goinst=False --uri file:///mnt/data/home/mdupont/experiments/odoo/openerp/import_xml.xsd
+	./go-xsd --gofmt=False --goinst=False --uri file:///mnt/data/home/mdupont/experiments/odoo/openerp/test.xsd
 
 encoding2/xml.o : encoding2/xml/marshal.go encoding2/xml/read.go encoding2/xml/typeinfo.go encoding2/xml/xml.go
 	gccgo-5 -g -c -o encoding2/xml.o $^
